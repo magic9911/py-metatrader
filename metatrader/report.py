@@ -4,8 +4,8 @@ Created on 2015/01/31
 @author: Taiga
 '''
 
-from mt4 import get_mt4
-from mt4 import DEFAULT_MT4_NAME
+from metatrader.mt4 import get_mt4
+from metatrader.mt4 import DEFAULT_MT4_NAME
 import logging
 
 def has_divtag_with_style(tag):
@@ -97,8 +97,8 @@ class BacktestReport(BaseReport):
             if td.text == 'Initial deposit':
                 self.initial_deposit = float(tds[index+1].text)
             if td.text == 'Modelling quality':
-                modeling_quality_percentage_str = re.sub('%', '', tds[index+1].text)
-                self.modeling_quality_percentage = float(modeling_quality_percentage_str)
+                #modeling_quality_percentage_str = re.sub('%', '', tds[index+1].text)
+                self.modeling_quality_percentage = tds[index+1].text #float(modeling_quality_percentage_str)
             elif td.text == 'Total net profit':
                 self.profit = float(tds[index+1].text)
             elif td.text == 'Gross profit':
@@ -173,7 +173,7 @@ class BacktestReport(BaseReport):
 
     def get_data_and_rate(self, line):
         import re
-        from exception import InvalidReportFormat
+        from metatrader.exception import InvalidReportFormat
         formatted_str = re.sub('(\(|\))', '', line)
         values = formatted_str.split(r' ')
 
@@ -196,7 +196,7 @@ class BacktestReport(BaseReport):
                123.45 (1) => (123.45, 1)
         '''
         import re
-        from exception import InvalidReportFormat
+        from metatrader.exception import InvalidReportFormat
 
         formatted_str = re.sub('(\(|\))', '', line)
         values = formatted_str.split(r' ')
@@ -348,7 +348,7 @@ class OptimizationReport():
         return results
 
     def __init__(self, backtest, alias=DEFAULT_MT4_NAME):
-        from exception import InvalidReportFormat
+        from metatrader.exception import InvalidReportFormat
         
         report_file = get_report_abs_path(backtest.ea_name, alias=alias)
 

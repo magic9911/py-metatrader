@@ -6,9 +6,9 @@ Created on 2015/01/25
 '''
 import logging
 import os
-from mt4 import get_mt4
-from mt4 import DEFAULT_MT4_NAME
-from __builtin__ import str
+from metatrader.mt4 import get_mt4
+from metatrader.mt4 import DEFAULT_MT4_NAME
+# from __builtin__ import str
 
 class BackTest(object):
     """
@@ -141,7 +141,7 @@ class BackTest(object):
         Notes:
           run backtest
         """
-        from report import BacktestReport
+        from metatrader.report import BacktestReport
 
         self.optimization = False
 
